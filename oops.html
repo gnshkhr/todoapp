@@ -1,0 +1,340 @@
+<script>
+    class Student {
+
+        fname = "";
+        lname = "";
+        constructor(fname, lname) {
+
+            this.fname = fname;
+            this.lname = lname;
+        }
+
+        displayNmaes() {
+
+            document.write("<p>Full Name :" + this.fname + " " + this.lname + " " + "</p>");
+            return `<p> ${this.fname}  ${this.lname} `;
+        }
+    }
+
+    let stud1 = new Student("Ganesh", "Khaire");
+
+    stud1.displayNmaes();
+
+    let stud2 = new Student("Rahul", "Pandey");
+
+    stud1.displayNmaes();
+
+    document.write("<hr>");
+    // class Point {
+
+    //     constructor(x, y) {
+    //         this.x = x;
+    //         this.y = y;
+    //     }
+
+    //     show() {
+    //         document.write(`(${this.x} , ${this.y})`);
+    //     }
+
+    //     findLargest(temp) {
+
+    //         let demo;
+
+    //         if (this.x > temp.x && this.y > temp.y) {
+
+    //             return demo = this;
+    //             // document.write(`(${this.x} , ${this.y})`);
+
+    //         } else {
+
+    //             return temp;
+
+    //             // document.write(`(${temp.x} , ${temp.y})`);
+    //         }
+
+
+    //     }
+    // }
+    // p1 = new Point(8, 16);
+    // p2 = new Point(1, 6);
+    // let p = p1.findLargest(p2);
+    // p.show();
+
+    class Point {
+
+        x = "";
+        y = "";
+
+        constructor(x, y) {
+
+            this.x = x;
+            this.y = y;
+        }
+
+        findLargestPair(temp) {
+
+            let demo;
+
+            if (this.x > temp && this.y > temp) {
+                return demo = this
+
+            } else {
+                return temp;
+            }
+        }
+
+        show() {
+            document.write(`<p>${this.x} ${this.y}</p>`);
+        }
+
+
+    }
+
+    p1 = new Point(12, 14);
+    p2 = new Point(14, 1);
+    let p = p2.findLargestPair(p1);
+    p.show();
+
+    document.write("<hr>");
+
+    class Bank {
+        accountNo = "";
+        accountName = "";
+        currentBalance = "";
+        // depositAmt = "";
+
+        constructor(accountNo, accountName, currentBalance) {
+
+            this.accountNo = accountNo;
+            this.accountName = accountName;
+            this.currentBalance = currentBalance;
+
+        }
+
+        accounDetails() {
+
+            document.write(`<p> Account Name : ${this.accountName}</p>`);
+            document.write(`<p> Account No. : ${this.accountNo}</p>`);
+            document.write(`<p> Account Balance : ${this.currentBalance}</p>`);
+        }
+
+        depositAmount(depositAmt) {
+
+            this.depositAmt = depositAmt;
+            console.log(this.depositAmt)
+            Number(this.currentBalance = (this.depositAmt) + (this.currentBalance));
+            document.write(`<p> Deposite Amount : ${this.currentBalance}</p>`);
+            console.log(this.currentBalance)
+
+        }
+
+        withrawAmount(withdrawAmt) {
+
+            this.withdrawAmt = withdrawAmt;
+            //  console.log(this.withdrawAmt);
+
+
+
+            if (this.currentBalance > this.withdrawAmt && this.currentBalance >= 500) {
+
+                Number(this.currentBalance -= (this.withdrawAmt));
+                document.write(`<p> Witdraw Amount : ${this.withdrawAmt} `);
+                document.write(`<p> <b> Current Balance : ${this.currentBalance}   </b> </p>`);
+            } else {
+
+                document.write(`<p> Sorry , You can not withdraw amount .. due to low balance</p>`);
+            }
+            //console.log(this.currentBalance)
+
+
+        }
+
+
+
+    }
+
+    bank1 = new Bank(101, "Ganesh Khaire", 5000);
+    bank1.accounDetails();
+    bank1.depositAmount(10000);
+    bank1.withrawAmount(2000);
+
+    document.write("<hr>");
+
+    class Employee {
+
+        constructor(emp_name, emp_city, emp_salary) {
+
+            this.emp_name = emp_name;
+            this.emp_city = emp_city;
+            this.emp_salary = emp_salary;
+        }
+    }
+    let employees = [
+        new Employee("ganesh", "pune", 35000),
+        new Employee("susmita", "nasik", 25000),
+        new Employee("saisha", "shaha", 5000),
+        new Employee("shrushti", "Nanded", 45000),
+        new Employee("sarika", "pune", 65000)
+    ];
+
+
+    function myFunction() {
+        employees.sort(function(a, b) {
+
+            return a.emp_salary - b.emp_salary
+        });
+        reademployees();
+    }
+
+
+    function reademployees()
+
+    {
+        for (let emp in employees) {
+            document.write(employees[emp].emp_name + "   ");
+            document.write(employees[emp].emp_city + "   ");
+            document.write(employees[emp].emp_salary + "   ");
+            document.write("<hr>");
+        }
+    }
+
+    function salaryavgemployees()
+
+    {
+        for (let emp in employees) {
+            document.write(employees[emp].emp_name + "   ");
+            document.write(employees[emp].emp_city + "   ");
+            document.write(employees[emp].emp_salary + "   ");
+            document.write("<hr>");
+        }
+    }
+    myFunction();
+
+    class Studentclass {
+
+        //setMarks(sub1, sub2, sub3) {
+
+        constructor(sub1, sub2, sub3) {
+
+            this.sub1 = sub1;
+            this.sub2 = sub2;
+            this.sub3 = sub3;
+
+        }
+
+        setTotal() {
+
+            this.total = this.sub1 + this.sub2 + this.sub3;
+        }
+
+
+        display() {
+
+                document.write(`${this.sub1}`);
+                document.write(`${this.sub1}`);
+                document.write(`${this.sub1}`);
+
+            }
+            // method overriding uses `super` keywords
+        demos() {
+            document.write(`<p> parents class get called`);
+        }
+
+    }
+
+    class Average extends Studentclass {
+
+        constructor(sub1, sub2, sub3) {
+
+            super(sub1, sub2, sub3)
+
+        }
+
+        averageMarks() {
+
+            this.avg = (this.sub1 + this.sub2 + this.sub3) / 3;
+
+        }
+
+        displayavaerge() {
+
+            document.write(`<p> Average Marks of subject : ${this.avg}`);
+        }
+
+        demos() {
+
+            super.demos();
+            document.write(`<p> child class methods get called`);
+        }
+
+    }
+
+    let result = new Average(45, 45, 55);
+    // result.setMarks(40, 80, 88);
+    result.averageMarks();
+    result.displayavaerge();
+    result.demos();
+
+
+
+    /* class Course {
+
+         constructor(code, name, fees, duration, type) {
+
+             this.code = code;
+             this.name = name;
+             this.fees = fees;
+             this.duration = duration;
+             this.type = type;
+         }
+
+     }
+
+     let courses = [
+         new Course(111, "Javascript", 999, "1 Week", "Foundation"),
+         new Course(112, "Python", 999, "1 Week", "Foundation"),
+         new Course(113, "PHP Masterclass", 3499, "8 Week", "Advanced"),
+     ];
+
+     //1. Create Function : to add new course from form into array
+     function addCourse() {
+
+         //1. Read the values from form and Convert it into object 
+         let course = new Course(courseCode.value, courseName.value, courseFees.value, courseDuration.value, courseType.value);
+
+         //3. Push object to array
+         courses.push(course);
+
+         //4. Print the table with updated array
+         readCourses();
+
+         //document.getElementById("newcoursemodal").modal('hide');
+         $("#newcoursemodal").modal('hide');
+     }
+
+     //2. Read Function: to read data from courses array and display it in a table tbody 
+     function readCourses() {
+
+         console.log("Read function called ");
+
+         let tablerows = "";
+
+         for (let index in courses) {
+
+             tablerows += "<tr>";
+
+             tablerows += "<th>";
+             tablerows += "<a href='#' onclick='deleteCourse(" + index + ") '> Delete </a> |";
+             tablerows += "<a href='#' onclick='editCourse(" + index + ")'> Edit </a>";
+             tablerows += "</th>";
+             tablerows += "<td>" + courses[index].code + "</td>";
+             tablerows += "<td>" + courses[index].name + "</td>";
+             tablerows += "<td>" + courses[index].fees + "</td>";
+             tablerows += "<td>" + courses[index].duration + "</td>";
+             tablerows += "<td>" + courses[index].type + "</td>";
+             tablerows += "</tr>";
+         }
+
+         courseList.innerHTML = tablerows;
+     }*/
+</script>

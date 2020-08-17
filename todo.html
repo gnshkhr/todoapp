@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta HTTP-EQUIV="REFRESH" content="3600"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="fontawesome-free-5.14.0-web/css/fontawesome.min.css">
+    <script src="https://kit.fontawesome.com/ad9549e5b4.js" crossorigin="anonymous"></script>
+    <title>ToDo Application</title>
+    <!--Web App Title-->
+    <!--Web App Favicon-->
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Quicksand|Righteous&display=swap');
+        .BG {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            z-index: -10;
+        }
+        /*Background Image design*/
+        
+        .dateHolder {
+            position: absolute;
+            height: 60px;
+            width: 100%;
+        }
+        /*Date container*/
+        
+        .todate {
+            position: absolute;
+            height: 200px;
+            width: 100%;
+            background: linear-gradient(rgb(241, 41, 68), rgb(255, 0, 106), transparent);
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            color: white;
+            font-family: 'Righteous', cursive;
+        }
+        /*Present date*/
+        
+        .date {
+            position: relative;
+            height: 50px;
+            float: left;
+            font-size: 60px;
+            margin-left: 10px;
+        }
+        
+        .daymonthyear {
+            position: relative;
+            height: 80px;
+            margin-left: 10px;
+            font-size: 20px;
+            float: left;
+            display: flex;
+            align-items: center;
+        }
+        /*Present Month and year*/
+        
+        .week {
+            position: absolute;
+            margin: auto;
+            height: 30px;
+            width: 100%;
+            text-align: center;
+            right: 0;
+            left: 0;
+            bottom: 30%;
+        }
+        /*The week table allows you to see which day of the week you are in*/
+        
+        .circle {
+            position: relative;
+            height: 20px;
+            width: 20px;
+            border: 1px solid white;
+            border-radius: 50px;
+            padding: 1px;
+            margin-left: 30%;
+            justify-content: center;
+        }
+        /*This circle element is added using js to highlight which date of the week you're in*/
+        
+        .todolist {
+            position: absolute;
+            height: 70%;
+            width: 90%;
+            margin: auto;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            overflow: scroll;
+            border-radius: 10px 10px 0 0;
+        }
+        /*This is the container for the ToDo list elements*/
+        
+        .li1 {
+            position: relative;
+            height: 120px;
+            width: 93%;
+            padding: 10px;
+            background: linear-gradient(to right, rgb(241, 41, 68), rgb(255, 0, 106), hotpink);
+            border-radius: 10px;
+        }
+        /*This is the basic design applied to the container of details in a ToDo list element*/
+        
+        .title,
+        .time,
+        .desc {
+            position: relative;
+            height: 36px;
+            width: 90%;
+            font-family: 'Quicksand', sans-serif;
+            color: white;
+            font-size: 25px;
+            overflow-y: scroll;
+        }
+        /*This is the text color and design for ToDo list elements' title, time target and description*/
+        
+        .time,
+        .desc {
+            font-size: 20px;
+        }
+        
+        .desc {
+            overflow: scroll;
+            height: 30px;
+        }
+        
+        .del {
+            position: absolute;
+            height: 20px;
+            filter: invert(1);
+            top: 15px;
+            right: 15px;
+        }
+        /*Design for the delete cross button*/
+        
+        .add {
+            position: absolute;
+            height: 40px;
+            width: 40px;
+            padding: 5px;
+            margin: auto;
+            bottom: 15px;
+            right: 15px;
+            background: #0ed6bb;
+            border-radius: 50px;
+            box-shadow: 0 0 20px #1bffe1;
+        }
+        
+        .form {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background: linear-gradient(rgb(241, 41, 68), rgb(255, 0, 106), pink);
+            z-index: 6;
+            transition: 1s;
+            transition-timing-function: ease;
+        }
+        /*Form to add a new ToDo List element*/
+        
+        .titleInp,
+        .timeInp,
+        .meridianInp,
+        .descInp {
+            position: absolute;
+            height: 30px;
+            font-family: 'Quicksand', sans-serif;
+            width: 70%;
+            margin: auto;
+            right: 0;
+            left: 0;
+            top: 35%;
+            border: 0;
+            text-align: center;
+            border-radius: 50px;
+            outline: none;
+        }
+        /*Input for various ToDo list parameters*/
+        
+        .timeInp {
+            top: 45%;
+        }
+        
+        .meridianInp {
+            height: 35px;
+            width: 20%;
+            left: 51%;
+            top: 44.7%;
+        }
+        
+        .descInp {
+            top: 55%;
+        }
+        
+        .submitBtn {
+            position: absolute;
+            height: 30px;
+            width: 70%;
+            outline: none;
+            border: 1px solid white;
+            font-family: 'Quicksand', sans-serif;
+            border-radius: 50px;
+            margin: auto;
+            right: 0;
+            left: 0;
+            top: 65%;
+            background: hotpink;
+            color: white;
+        }
+        /*Submit the information needed for a new ToDo list app item*/
+        
+        .AddItem {
+            position: absolute;
+            height: 100px;
+            width: 100%;
+            margin: auto;
+            right: 0;
+            left: 0;
+            text-align: center;
+            top: 15%;
+            color: white;
+            font-size: 50px;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .preloader {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(rgb(241, 41, 68), rgb(255, 0, 106), pink);
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 1s ease;
+        }
+        /*Preload GIF*/
+        
+        .logo {
+            position: absolute;
+            height: 140px;
+            filter: hue-rotate(140deg);
+        }
+        /*Logo displayed on the preloading page*/
+        
+        .loader {
+            position: absolute;
+            height: 140px;
+            bottom: 20%;
+            filter: hue-rotate(120deg);
+        }
+        
+         ::-webkit-scrollbar {
+            -webkit-appearance: none;
+            appearance: none;
+            display: none;
+        }
+        /*To remove all the visible scrollbars, it makes the code UI look ugly*/
+        
+        .plus {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: rgb(255, 45, 90);
+            border-radius: 50%;
+            font-weight: bolder;
+            bottom: 0;
+            right: 5%;
+            box-shadow: 0 0 40px rgb(173, 7, 43);
+        }
+        /*Button or div element, when pressed or clicked opens the form for ToDo list element input*/
+        
+        .exitForm {
+            position: absolute;
+            height: 30px;
+            filter: invert(1);
+            right: 10px;
+            top: 10px;
+        }
+        /*Button to exit the form in case it is opened by mistake by the user*/
+    </style>
+</head>
+
+<body>
+    <div class="preloader">
+        <img src="https://www.any.do/v4/images/og-image.png" class="logo">
+        <img src="https://flevix.com/wp-content/uploads/2019/07/Line-Preloader.gif" class="loader">
+    </div>
+    <div class="todate">
+        <div class="dateHolder">
+            <div class="date"></div>
+            <div class="daymonthyear">
+                Monday <br> Dec, 2019
+            </div>
+        </div>
+        <table class="week">
+            <!--Table to display the days and dates of the week, just a small calendar layout-->
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <tr>
+                <td id="d1">10</td>
+                <td id="d2">11</td>
+                <td id="d3">12</td>
+                <td id="d4">13</td>
+                <td id="d5">14</td>
+                <td id="d6">15</td>
+                <td id="d7">16</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="todolist"></div>
+    <div class="form">
+        <img src="https://static.thenounproject.com/png/236306-200.png" class="exitForm" onclick="closeForm()">
+        <h1 class="AddItem">Add Item</h1>
+        <input type="text" placeholder="Enter title e.g. Get a Haircut" class="titleInp"><br>
+        <input type="time" placeholder="Enter time e.g. 12:20" class="timeInp">
+        <br>
+        <input type="text" class="descInp" placeholder="Enter a short description...">
+        <button class="submitBtn" onclick="submit()">SUBMIT</button>
+    </div>
+    <h3 onclick="addItem()" class="plus">+</h3>
+    <img src="https://source.unsplash.com/collection/190727/1500x900" class="BG">
+
+    <script>
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; //Array to store the names of the days of week and months
+        window.onload = function() { //function that executes the app and makes it ready to use by halting for the images to load.
+            formListItem(); //function that shows up all the example todo list items in order
+            document.querySelector(".form").style.transform = 'translateY(-100%)'; //removes form and moves it to the top, hence making it out of sight.
+            document.querySelector(".preloader").style.transform = 'translateY(-100%)'; //removes the preloader page after the app is ready for use.
+            var date = new Date(); //Date object to get basic date data
+            document.querySelector(".date").innerHTML = date.getDate();
+            document.querySelector(".daymonthyear").innerHTML = days[date.getDay()] + "<br>" + month[date.getMonth()] + ", " + date.getFullYear();
+            var firstDayOfWeek = date.getDate() - date.getDay();
+
+            for (var i = 0; i <= 6; i++) { //to set the week calendar on the app
+                var wDate = new Date(date.getFullYear(), date.getMonth(), firstDayOfWeek++); //increasing dates
+                if (wDate.getDate() == date.getDate())
+                    document.querySelector("#d" + (i + 1)).innerHTML = "<div class = 'circle'>" + wDate.getDate() + '</div>';
+                else
+                    document.querySelector("#d" + (i + 1)).innerHTML = wDate.getDate();
+            }
+        }
+
+        //End of Date
+
+
+        var itemsTitles = ["Have a haircut", "Make a web app", "Get Eggs", "Watch Hotel Mumbai"] //Array for item titles
+            ,
+            itemsTime = ["At 1:39 a.m.", "At 12:45 p.m.", "At 11:00 a.m.", "At 8:00 p.m."] //Array for item time targets
+            ,
+            itemsDesc = ["Get a new haircut to allow myself to enter my school", "Make a new Web App for Sololearn", "Get Eggs for breakfast", "Watch the movie Hotel Mumbai, A movie based on true events that took place in India."] //Array for items' description;
+
+        function addItem() { //initializes every field to a blank value and brings the form in sight.
+            document.querySelector(".titleInp").value = '';
+            document.querySelector(".timeInp").value = '';
+            document.querySelector(".descInp").value = '';
+
+            document.querySelector(".form").style.transform = 'translateY(0)';
+        }
+
+        function submit() {
+            if ((document.querySelector(".titleInp").value).trim() != '' && (document.querySelector(".timeInp").value).trim() != '' && (document.querySelector(".descInp").value).trim() != '') {
+                itemsTitles.push(document.querySelector(".titleInp").value);
+
+                itemsTime.push("At " + document.querySelector(".timeInp").value);
+                itemsDesc.push(document.querySelector(".descInp").value);
+                document.querySelector(".form").style.transform = 'translateY(-100%)';
+                document.querySelector(".todolist").innerHTML = "";
+                formListItem();
+            } //submits data and refreshes the lists after adding all details only if all data in the form have some valid value.
+        }
+
+        function formListItem() {
+            for (var i = 0; i < itemsTitles.length; i++) {
+                document.querySelector(".todolist").innerHTML += "<div class='li1'><div class='title'>" + itemsTitles[i] + "</div><div class='time'>" + itemsTime[i] + "</div><br><marquee class='desc'>" + itemsDesc[i] + "</marquee><img onclick='deleteItem(" + i + ")' src=\"https://static.thenounproject.com/png/236306-200.png\" class=\"del\"><img class='tick' src='https://image.flaticon.com/icons/png/512/60/60727.png' onclick='strike(" + i + ")' style='position: relative;height: 23px;bottom: 60px;filter:invert(1);left:0;'></div><br>";
+            }
+        } //forms the list item by basic html and designed using CSS above.
+
+        function deleteItem(c) {
+            itemsTitles.splice(c, 1);
+            itemsTime.splice(c, 1);
+            itemsDesc.splice(c, 1);
+            document.querySelector(".todolist").innerHTML = '';
+            formListItem();
+        } //Delete item of the list and refresh the lists
+        function strike(c) {
+            if (itemsTitles[c].includes("<strike>")) {
+                itemsTitles[c] = itemsTitles[c].replace("<strike>", "");
+                itemsTitles[c] = itemsTitles[c].replace("</strike>", "");
+            } else {
+                itemsTitles[c] = "<strike>" + itemsTitles[c] + "</strike>";
+            }
+            document.querySelector(".todolist").innerHTML = '';
+            formListItem();
+        } //Strike the particular task to denote that the user is done with the task and refresh the lists
+        function closeForm() {
+            document.querySelector(".form").style.transform = 'translateY(-100%)';
+        } //Close the form or take the form out of sight in case the user might have opened the form by mistake or does not want to add a new item.
+    </script>
+</body>
+
+
+
+</html>
